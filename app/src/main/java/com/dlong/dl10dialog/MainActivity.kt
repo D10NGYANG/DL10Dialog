@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.dlong.dialog.*
+import com.dlong.dl10dialog.adapter.GridIconAdapter
 import com.dlong.dl10dialog.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -65,10 +66,38 @@ class MainActivity : AppCompatActivity() {
 
     @Synchronized
     fun clickGridDialog(view: View) {
+        val adapter = GridIconAdapter(this, listOf(
+            R.mipmap.icon_grid_0,
+            R.mipmap.icon_grid_1,
+            R.mipmap.icon_grid_2,
+            R.mipmap.icon_grid_3,
+            R.mipmap.icon_grid_4,
+            R.mipmap.icon_grid_5,
+            R.mipmap.icon_grid_6,
+            R.mipmap.icon_grid_7,
+            R.mipmap.icon_grid_8,
+            R.mipmap.icon_grid_9,
+            R.mipmap.icon_grid_10,
+            R.mipmap.icon_grid_11,
+            R.mipmap.icon_grid_12,
+            R.mipmap.icon_grid_13,
+            R.mipmap.icon_grid_14,
+            R.mipmap.icon_grid_15,
+            R.mipmap.icon_grid_16,
+            R.mipmap.icon_grid_17
+            ))
         GridDialog(this).create()
-                .setTittle("提示")
-                .setMsg("选择图标")
-                .setIcon(R.mipmap.icon_notice)
+            .setTittle("提示")
+            .setMsg("选择图标")
+            .setIcon(R.mipmap.icon_notice)
+            .setGridList(adapter, 3, object : OnItemClick{
+                override fun click(d: GridDialog, p: Int) {
+                    val icon = adapter.getItem(p) as Int
+                    d.setIcon(icon)
+                }
+            })
+            .addAction("取消", ButtonStyle.NORMAL, null)
+            .show()
     }
 
     @Synchronized
