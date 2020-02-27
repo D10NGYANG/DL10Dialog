@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- text -->
+    <color name="colorTextTheme">#00aaef</color>
+    <color name="colorTextTittle">#333333</color>
+    <color name="colorTextNormal">#666666</color>
+    <color name="colorTextHint">#999999</color>
+    <color name="colorTextError">#FF0000</color>
+    <color name="colorTextKey">#ffff00</color>
+
+    <!-- background -->
+    <color name="colorDialogBackground">#ffffff</color>
+    <color name="colorDialogTittleBackground">#eeeeee</color>
+    <color name="colorDialogButtonBackground">#ffffff</color>
+    <color name="colorDialogSpaceLine">#eeeeee</color>
+</resources>

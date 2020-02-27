@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="version"
+            type="String" />
+        <variable
+            name="time"
+            type="String" />
+        <variable
+            name="author"
+            type="String" />
+        <variable
+            name="content"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txt_version"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:gravity="center_vertical"
+            android:text='@{@string/version + version}'
+            android:textColor="@color/colorTextNormal"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/txt_time"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:gravity="center_vertical"
+            android:text='@{@string/created_time + time}'
+            android:textColor="@color/colorTextNormal"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/txt_author"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:gravity="center_vertical"
+            android:text='@{@string/author + author}'
+            android:textColor="@color/colorTextNormal"
+            android:textSize="14sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text='@string/content'
+                android:textColor="@color/colorTextNormal"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/txt_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:lineSpacingExtra="8sp"
+                android:text='@{content}'
+                android:textColor="@color/colorTextNormal"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>
