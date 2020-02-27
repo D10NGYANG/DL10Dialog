@@ -48,6 +48,17 @@ class EditDialog constructor(
     }
 
     /**
+     * 移除编辑框
+     * @param tag 标签
+     */
+    fun removeEdit(tag: String) {
+        if (edtMap[tag] != null) {
+            binding.contentLayout.removeView(edtMap[tag]?.root)
+            edtMap.remove(tag)
+        }
+    }
+
+    /**
      * 设置输入类型
      * @param tag 标签
      * @param type 类型
