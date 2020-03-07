@@ -151,4 +151,44 @@ class MainActivity : AppCompatActivity() {
                 .addAction("取消", ButtonStyle.NORMAL, null)
                 .show()
     }
+
+    @Synchronized
+    fun clickMultiSelectDialog(view: View) {
+        MultiSelectDialog(this).create()
+            .setTittle("提示")
+            .setMsg("请选择你喜欢的手机品牌，可多选")
+            .addSelectItem("小米", false)
+            .addSelectItem("华为", false)
+            .addSelectItem("三星", false)
+            .addSelectItem("苹果", false)
+            .addSelectItem("中兴", false)
+            .addSelectItem("联想", false)
+            .addSelectItem("诺基亚", false)
+            .addSelectItem("魅族", false)
+            .addSelectItem("努比亚", false)
+            .addSelectItem("OPPO", false)
+            .addSelectItem("vivo", false)
+            .addSelectItem("LG", false)
+            .addSelectItem("荣耀", false)
+            .addSelectItem("红米", false)
+            .addSelectItem("锤子", false)
+            .addSelectItem("坚果", false)
+            .addSelectItem("realme", false)
+            .addSelectItem("一加", false)
+            .addSelectItem("黑鲨", false)
+            .addAction("确定", ButtonStyle.THEME, object : OnBtnClick{
+                override fun click(d0: BaseDialog<*>, text: String) {
+                    val dialog = d0 as MultiSelectDialog
+                    val map = dialog.getAllItemMap()
+                    val builder = StringBuilder("您喜欢的手机品牌是：")
+                    for (value in map.keys) {
+                        if (map[value] == true) builder.append(value).append("、")
+                    }
+                    dialog.dismiss()
+                    Toast.makeText(this@MainActivity, builder.toString(), Toast.LENGTH_SHORT).show()
+                }
+            })
+            .addAction("没有我喜欢的品牌", ButtonStyle.NORMAL, null)
+            .show()
+    }
 }

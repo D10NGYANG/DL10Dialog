@@ -54,6 +54,12 @@
                     android:layout_height="wrap_content"
                     android:onClick="clickTimePickDialog"
                     android:text="时间选择弹窗" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="clickMultiSelectDialog"
+                    android:text="多选弹窗" />
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
