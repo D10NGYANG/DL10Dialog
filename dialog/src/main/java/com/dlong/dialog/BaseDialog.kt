@@ -153,6 +153,7 @@ open class BaseDialog<T> constructor(
     open fun show() {
         val act = context as Activity
         if (!act.isFinishing) alert?.show()
+        alert?.window?.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.dialog_def_bg))
     }
 
     /**

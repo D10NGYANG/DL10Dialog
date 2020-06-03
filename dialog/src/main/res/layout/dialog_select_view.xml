@@ -19,7 +19,7 @@
             android:buttonTint="@color/colorTextTheme"
             android:text="CheckBox"
             android:textColor="@color/colorTextNormal"
-            android:textSize="14sp"
+            android:textSize="@dimen/textContentSize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

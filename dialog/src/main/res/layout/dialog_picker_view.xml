@@ -24,7 +24,7 @@
             android:gravity="center"
             android:text="@{startText}"
             android:textColor="@color/colorTextNormal"
-            android:textSize="14sp" />
+            android:textSize="@dimen/textContentSize" />
 
         <NumberPicker
             android:id="@+id/picker"
@@ -41,7 +41,7 @@
             android:gravity="center"
             android:text="@{endText}"
             android:textColor="@color/colorTextNormal"
-            android:textSize="14sp" />
+            android:textSize="@dimen/textContentSize" />
 
     </LinearLayout>
 </layout>
