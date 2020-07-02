@@ -26,13 +26,12 @@
             android:textColor="@color/colorTextNormal"
             android:textSize="@dimen/textContentSize" />
 
-        <NumberPicker
+        <com.dlong.dialog.view.CustomNumberPicker
             android:id="@+id/picker"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-        </NumberPicker>
+            android:layout_weight="1"
+            android:selectionDividerHeight="0px"/>
 
         <TextView
             android:id="@+id/txt_end"
