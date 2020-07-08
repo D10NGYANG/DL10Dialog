@@ -18,13 +18,8 @@ import com.dlong.dialog.R
  */
 class CustomNumberPicker constructor(
     context: Context,
-    attrs: AttributeSet?,
-    defStyle: Int
-) : NumberPicker(context, attrs, defStyle) {
-
-    constructor(context: Context) : this(context, null, android.R.attr.numberPickerStyle)
-
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, android.R.attr.numberPickerStyle)
+    attrs: AttributeSet? = null
+) : NumberPicker(context, attrs) {
 
     override fun addView(child: View?, index: Int, params: ViewGroup.LayoutParams?) {
         super.addView(child, index, params)
