@@ -17,7 +17,7 @@ import com.dlong.dialog.databinding.DialogDefLoadingViewBinding
  * @author D10NG
  * @date on 2019-10-25 14:49
  */
-open class BaseDialog<T> constructor(
+open class BaseDialog<T : BaseDialog<T>> constructor(
     private val context: Context
 ) {
     /** 弹窗创建器 */
@@ -48,16 +48,18 @@ open class BaseDialog<T> constructor(
     /**
      * 移除所有button
      */
-    open fun removeAllButtons() {
+    open fun removeAllButtons(): T {
         binding.buttonLayout.removeAllViews()
         buttonMap.clear()
+        return this as T
     }
 
     /**
      * 移除content内容
      */
-    open fun removeContent() {
+    open fun removeContent(): T {
         binding.contentLayout.removeAllViews()
+        return this as T
     }
 
     /**
@@ -95,11 +97,12 @@ open class BaseDialog<T> constructor(
     /**
      * 开始加载中
      */
-    open fun startLoad(indeterminate: Boolean, progress: Int, max: Int) {
+    open fun startLoad(indeterminate: Boolean, progress: Int, max: Int) : T {
         binding.loadIndeterminate = indeterminate
         binding.loadProgress = progress
         binding.loadMax = max
         binding.loadVisible = true
+        return this as T
     }
 
     /**
@@ -115,21 +118,23 @@ open class BaseDialog<T> constructor(
     /**
      * 更新进度
      */
-    open fun  updateLoadProgress(progress: Int) {
+    open fun updateLoadProgress(progress: Int) : T {
         binding.loadProgress = progress
+        return this as T
     }
 
     /**
      * 停止加载中
      */
-    open fun stopLoad() {
+    open fun stopLoad(): T {
         binding.loadVisible = false
+        return this as T
     }
 
     /**
      * 添加button事件
      */
-    open fun addAction(text: String, style: Int, onBtnClick: OnBtnClick?) : T {
+    open fun addAction(text: String, style: Int, onBtnClick: (OnBtnClickListener<T>.() -> Unit)?) : T {
         val view = createButton(text, style, onBtnClick)
         removeAction(text)
         binding.buttonLayout.addView(view)
@@ -140,20 +145,24 @@ open class BaseDialog<T> constructor(
     /**
      * 删除按键
      */
-    open fun removeAction(text: String) {
+    open fun removeAction(text: String): T {
         if (buttonMap.containsKey(text)) {
             binding.buttonLayout.removeView(buttonMap[text])
             buttonMap.remove(text)
         }
+        return this as T
     }
 
     /**
      * 显示
      */
-    open fun show() {
+    open fun show(): T {
         val act = context as Activity
-        if (!act.isFinishing) alert?.show()
-        alert?.window?.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.dialog_def_bg))
+        if (!act.isFinishing && alert?.isShowing == false) {
+            alert?.show()
+            alert?.window?.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.dialog_def_bg))
+        }
+        return this as T
     }
 
     /**
@@ -163,7 +172,10 @@ open class BaseDialog<T> constructor(
         alert?.dismiss()
     }
 
-    protected fun createButton(text: String, style: Int, onBtnClick: OnBtnClick?) : Button {
+    /**
+     * 创建按钮
+     */
+    protected fun createButton(text: String, style: Int, onBtnClick: (OnBtnClickListener<T>.() -> Unit)?) : Button {
         val button = Button(context)
         button.background = ContextCompat.getDrawable(context, R.drawable.button_top_line_bg)
         button.text = text
@@ -176,7 +188,9 @@ open class BaseDialog<T> constructor(
             if (null == onBtnClick) {
                 dismiss()
             } else {
-                onBtnClick.click(this, text)
+                val clickBuilder = OnBtnClickListener<T>()
+                clickBuilder.onBtnClick()
+                clickBuilder.click(this as T, text)
             }
         }
         return button

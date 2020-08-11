@@ -21,7 +21,7 @@ class GridDialog constructor(
     }
 
     /** 设置grid列表显示 */
-    fun setGridList(adapter: BaseAdapter, numColumns: Int, onItemClick: OnItemClick?) : GridDialog {
+    fun setGridList(adapter: BaseAdapter, numColumns: Int, onItemClick: (OnItemClickListener.() -> Unit)?) : GridDialog {
         removeContent()
         gridMap.clear()
         val viewBinding: DialogGridViewBinding = DataBindingUtil.inflate(
@@ -31,7 +31,12 @@ class GridDialog constructor(
         viewBinding.gridView.adapter = adapter
         viewBinding.gridView.numColumns = numColumns
         viewBinding.gridView.setOnItemClickListener { p0, p1, p2, p3 ->
-            onItemClick?.click(this@GridDialog, p2) }
+            if (onItemClick != null) {
+                val listener = OnItemClickListener()
+                listener.onItemClick()
+                listener.click(this@GridDialog, p2)
+            }
+        }
         binding.contentLayout.addView(viewBinding.root)
         gridMap[TAG] = viewBinding
         return this
@@ -43,4 +48,18 @@ class GridDialog constructor(
  */
 interface OnItemClick{
     fun click(d: GridDialog, p: Int)
+}
+
+class OnItemClickListener: OnItemClick {
+
+    private lateinit var mListener: (dialog: GridDialog, position: Int) -> Unit
+
+    fun onClick(listener: (dialog: GridDialog, position: Int) -> Unit) {
+        this.mListener = listener
+    }
+
+    override fun click(d: GridDialog, p: Int) {
+        this.mListener.invoke(d, p)
+    }
+
 }

@@ -7,6 +7,8 @@ import android.widget.GridView
 
 
 /**
+ * 高度自动的GridView
+ *
  * @author D10NG
  * @date on 2020/2/25 11:21 AM
  */

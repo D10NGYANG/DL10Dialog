@@ -51,11 +51,12 @@ class EditDialog constructor(
      * 移除编辑框
      * @param tag 标签
      */
-    fun removeEdit(tag: String) {
+    fun removeEdit(tag: String) : EditDialog {
         if (edtMap[tag] != null) {
             binding.contentLayout.removeView(edtMap[tag]?.root)
             edtMap.remove(tag)
         }
+        return this
     }
 
     /**

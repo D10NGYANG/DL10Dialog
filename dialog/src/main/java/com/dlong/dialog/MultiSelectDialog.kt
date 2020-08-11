@@ -41,11 +41,12 @@ class MultiSelectDialog constructor(
     }
 
     /** 移除一个选项 */
-    fun removeSelectItem(text: String) {
+    fun removeSelectItem(text: String) : MultiSelectDialog {
         if (bindMap[text] != null) {
             binding.contentLayout.removeView(bindMap[text]?.root)
             bindMap.remove(text)
         }
+        return this
     }
 
     /** 选项是否被选中 */

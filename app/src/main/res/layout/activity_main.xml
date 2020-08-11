@@ -60,6 +60,13 @@
                     android:layout_height="wrap_content"
                     android:onClick="clickMultiSelectDialog"
                     android:text="多选弹窗" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="clickLoading"
+                    android:text="加载中" />
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

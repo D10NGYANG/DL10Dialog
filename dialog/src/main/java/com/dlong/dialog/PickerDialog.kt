@@ -77,11 +77,12 @@ class PickerDialog constructor(
     }
 
     /** 移除选择列表 */
-    fun removePickList(tag: String) {
+    fun removePickList(tag: String): PickerDialog {
         if (bindingMap[tag] != null) {
             binding.contentLayout.removeView(bindingMap[tag]?.root)
             bindingMap.remove(tag)
         }
+        return this
     }
 
     /** 获取选中项文本内容 */
