@@ -153,6 +153,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     @Synchronized
+    fun clickDataPickDialog(view: View) {
+        DataPickerDialog(this).create()
+            .setTittle("提示")
+            .setMsg("选择日期")
+            .setYearPickList(end = "年")
+            .setMonthPickList(end = "月")
+            .setDayPickList()
+            .addAction("确定", ButtonStyle.THEME) {
+                onClick { dialog, _ ->
+                    val year = dialog.getYearPickValue()
+                    val month = dialog.getMonthPickValue()
+                    val day = dialog.getDayPickValue()
+                    dialog.dismiss()
+                    Toast.makeText(this@MainActivity, "$year 年 $month 月 $day 日", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addAction("取消", ButtonStyle.NORMAL, null)
+            .show()
+    }
+
+    @Synchronized
     fun clickMultiSelectDialog(view: View) {
         MultiSelectDialog(this).create()
             .setTittle("提示")
@@ -195,7 +216,7 @@ class MainActivity : AppCompatActivity() {
     fun clickLoading(view: View) {
         val dialog = JustLoadDialog(this).create().show()
         GlobalScope.launch {
-            delay(3000)
+            delay(1000)
             withContext(Dispatchers.Main) {dialog.dismiss()}
         }
     }

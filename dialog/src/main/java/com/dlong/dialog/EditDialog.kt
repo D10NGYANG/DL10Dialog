@@ -12,9 +12,9 @@ import com.dlong.dialog.databinding.DialogEditViewBinding
  * @author D10NG
  * @date on 2019-11-23 10:05
  */
-class EditDialog constructor(
-    private val context: Context
-) : BaseDialog<EditDialog>(context) {
+open class EditDialog constructor(
+    context: Context
+) : BaseDialog(context) {
 
     init {
         // 改变宽度

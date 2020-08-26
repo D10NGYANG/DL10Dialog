@@ -1,4 +1,6 @@
-package com.dlong.dialog
+package com.dlong.dialog.impl
+
+import com.dlong.dialog.BaseDialog
 
 /**
  * 弹窗按钮点击接口
@@ -6,14 +8,14 @@ package com.dlong.dialog
  * @author D10NG
  * @date on 2019-10-26 15:40
  */
-interface OnBtnClick<T : BaseDialog<T>> {
+interface OnBtnClick<T : BaseDialog> {
     fun click(d0: T, text: String)
 }
 
 /**
  * 简化回调接口
  */
-class OnBtnClickListener<T : BaseDialog<T>> : OnBtnClick<T> {
+class OnBtnClickListener<T : BaseDialog> : OnBtnClick<T> {
 
     private lateinit var onClickVal: (dialog: T, text: String) -> Unit
 
@@ -24,5 +26,4 @@ class OnBtnClickListener<T : BaseDialog<T>> : OnBtnClick<T> {
     override fun click(d0: T, text: String) {
         this.onClickVal.invoke(d0, text)
     }
-
 }

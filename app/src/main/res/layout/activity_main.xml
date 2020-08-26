@@ -58,6 +58,12 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="clickDataPickDialog"
+                    android:text="日期选择弹窗" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:onClick="clickMultiSelectDialog"
                     android:text="多选弹窗" />
 

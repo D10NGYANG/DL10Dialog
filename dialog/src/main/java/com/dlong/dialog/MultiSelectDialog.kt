@@ -10,9 +10,9 @@ import com.dlong.dialog.databinding.DialogSelectViewBinding
  * @author D10NG
  * @date on 2020/3/7 1:49 PM
  */
-class MultiSelectDialog constructor(
-    private val context: Context
-) : BaseDialog<MultiSelectDialog>(context) {
+open class MultiSelectDialog constructor(
+    context: Context
+) : BaseDialog(context) {
 
     init {
         // 改变宽度

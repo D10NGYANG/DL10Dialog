@@ -5,14 +5,15 @@ import android.view.LayoutInflater
 import android.widget.BaseAdapter
 import androidx.databinding.DataBindingUtil
 import com.dlong.dialog.databinding.DialogGridViewBinding
+import com.dlong.dialog.impl.OnGridItemClickListener
 
 /**
  * @author D10NG
  * @date on 2020-01-07 13:10
  */
-class GridDialog constructor(
-    private val context: Context
-) : BaseDialog<GridDialog>(context) {
+open class GridDialog constructor(
+    context: Context
+) : BaseDialog(context) {
 
     /** 编辑框列表 */
     private val gridMap: MutableMap<String, DialogGridViewBinding> = mutableMapOf()
@@ -21,8 +22,8 @@ class GridDialog constructor(
     }
 
     /** 设置grid列表显示 */
-    fun setGridList(adapter: BaseAdapter, numColumns: Int, onItemClick: (OnItemClickListener.() -> Unit)?) : GridDialog {
-        removeContent()
+    fun setGridList(adapter: BaseAdapter, numColumns: Int, onItemClick: (OnGridItemClickListener<GridDialog>.() -> Unit)?) : GridDialog {
+        removeContent<GridDialog>()
         gridMap.clear()
         val viewBinding: DialogGridViewBinding = DataBindingUtil.inflate(
             LayoutInflater.from(context),
@@ -32,7 +33,7 @@ class GridDialog constructor(
         viewBinding.gridView.numColumns = numColumns
         viewBinding.gridView.setOnItemClickListener { p0, p1, p2, p3 ->
             if (onItemClick != null) {
-                val listener = OnItemClickListener()
+                val listener = OnGridItemClickListener<GridDialog>()
                 listener.onItemClick()
                 listener.click(this@GridDialog, p2)
             }
@@ -41,25 +42,4 @@ class GridDialog constructor(
         gridMap[TAG] = viewBinding
         return this
     }
-}
-
-/**
- * 点击选项
- */
-interface OnItemClick{
-    fun click(d: GridDialog, p: Int)
-}
-
-class OnItemClickListener: OnItemClick {
-
-    private lateinit var mListener: (dialog: GridDialog, position: Int) -> Unit
-
-    fun onClick(listener: (dialog: GridDialog, position: Int) -> Unit) {
-        this.mListener = listener
-    }
-
-    override fun click(d: GridDialog, p: Int) {
-        this.mListener.invoke(d, p)
-    }
-
 }

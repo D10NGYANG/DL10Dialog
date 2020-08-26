@@ -13,8 +13,8 @@ import com.dlong.dialog.databinding.DialogVersionViewBinding
  * @date on 2019-11-27 14:28
  */
 class VersionInfoDialog constructor(
-    private val context: Context
-) : BaseDialog<VersionInfoDialog>(context) {
+    context: Context
+) : BaseDialog(context) {
 
     init {
         // 改变宽度

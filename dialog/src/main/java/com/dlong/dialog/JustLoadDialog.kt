@@ -16,7 +16,7 @@ import com.dlong.dialog.utils.dp2px
  * @author D10NG
  * @date on 2020/8/11 9:12 AM
  */
-class JustLoadDialog constructor(val context: Context) {
+open class JustLoadDialog constructor(val context: Context) {
 
     /** 弹窗创建器 */
     protected val builder = AlertDialog.Builder(context)

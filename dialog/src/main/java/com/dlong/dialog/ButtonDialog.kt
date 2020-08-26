@@ -9,6 +9,6 @@ import android.content.Context
  * @author D10NG
  * @date on 2019-10-25 15:02
  */
-class ButtonDialog constructor(
+open class ButtonDialog constructor(
     context: Context
-) : BaseDialog<ButtonDialog>(context)
+) : BaseDialog(context)
