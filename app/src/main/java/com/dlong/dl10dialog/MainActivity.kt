@@ -154,7 +154,7 @@ class MainActivity : AppCompatActivity() {
 
     @Synchronized
     fun clickDataPickDialog(view: View) {
-        DataPickerDialog(this).create()
+        DatePickerDialog(this).create()
             .setTittle("提示")
             .setMsg("选择日期")
             .setYearPickList(end = "年")

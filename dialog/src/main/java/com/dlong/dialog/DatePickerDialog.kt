@@ -6,12 +6,12 @@ import java.lang.Exception
 import java.util.*
 
 /**
- * 时间选择器
+ * 日期选择器
  *
  * @author D10NG
  * @date on 2020/8/25 7:10 PM
  */
-class DataPickerDialog constructor(
+class DatePickerDialog constructor(
     context: Context,
     // 开始时间 1976-01-01 00:00:00
     val startTime: Long = 189273600000L,
@@ -23,9 +23,9 @@ class DataPickerDialog constructor(
 
     init {
         if (startTime >= endTime) {
-            throw Exception("DataPickerDialog startTime >= endTime")
+            throw Exception("DatePickerDialog startTime >= endTime")
         } else if (selectTime !in startTime .. endTime) {
-            throw Exception("DataPickerDialog selectTime !in startTime .. endTime")
+            throw Exception("DatePickerDialog selectTime !in startTime .. endTime")
         }
     }
 
@@ -44,8 +44,8 @@ class DataPickerDialog constructor(
     private var dayEndStr = ""
 
     /** 日期选中监听器 */
-    val datePickDialogListener: (OnPickItemSelectListener<DataPickerDialog>.() -> Unit) = {
-        onSelect { dialog: DataPickerDialog, tag, position, selectItem ->
+    val datePickDialogListener: (OnPickItemSelectListener<DatePickerDialog>.() -> Unit) = {
+        onSelect { dialog: DatePickerDialog, tag, position, selectItem ->
             val selectYear = getYearPickValue()
             val selectMonth = getMonthPickValue()
             val selectDay = getDayPickValue()
@@ -133,9 +133,9 @@ class DataPickerDialog constructor(
 
     /**
      * 创建默认的日期选择器
-     * @return [DataPickerDialog]
+     * @return [DatePickerDialog]
      */
-    fun normalBuilder(): DataPickerDialog {
+    fun normalBuilder(): DatePickerDialog {
         setYearPickList()
         setMonthPickList()
         setDayPickList()
@@ -146,9 +146,9 @@ class DataPickerDialog constructor(
      * 设置年份选择
      * @param start
      * @param end
-     * @return [DataPickerDialog]
+     * @return [DatePickerDialog]
      */
-    fun setYearPickList(start: String = "", end: String = ""): DataPickerDialog {
+    fun setYearPickList(start: String = "", end: String = ""): DatePickerDialog {
         yearStartStr = start
         yearEndStr = end
         val yearList = getYearList()
@@ -162,9 +162,9 @@ class DataPickerDialog constructor(
      * 设置月份选择
      * @param start
      * @param end
-     * @return [DataPickerDialog]
+     * @return [DatePickerDialog]
      */
-    fun setMonthPickList(start: String = "", end: String = ""): DataPickerDialog {
+    fun setMonthPickList(start: String = "", end: String = ""): DatePickerDialog {
         monthStartStr = start
         monthEndStr = end
         val monthList = getMonthList(getTimeYear(selectTime))
@@ -177,9 +177,9 @@ class DataPickerDialog constructor(
      * 设置日期选择
      * @param start
      * @param end
-     * @return [DataPickerDialog]
+     * @return [DatePickerDialog]
      */
-    fun setDayPickList(start: String = "", end: String = ""): DataPickerDialog {
+    fun setDayPickList(start: String = "", end: String = ""): DatePickerDialog {
         dayStartStr = start
         dayEndStr = end
         val dayList = getDayList(getTimeYear(selectTime), getTimeMonth(selectTime))
