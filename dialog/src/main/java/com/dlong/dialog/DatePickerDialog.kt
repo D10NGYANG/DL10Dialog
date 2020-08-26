@@ -53,79 +53,33 @@ class DatePickerDialog constructor(
                 tagY -> {
                     if (!dialog.isHasTag(tagM)) return@onSelect
                     dialog.removePickList(tagM)
-                    when (selectYear) {
-                        getTimeYear(startTime) -> {
-                            val monthList = getMonthList(selectYear)
-                            val newSelectMonth = selectMonth.coerceAtLeast(getTimeMonth(startTime))
-                            dialog.addPickList(
-                                tagM, "$newSelectMonth", monthList,
-                                monthStartStr, monthEndStr, null, this
-                            )
-                            if (dialog.isHasTag(tagD)) {
-                                dialog.removePickList(tagD)
-                                val dayList = getDayList(selectYear, newSelectMonth)
-                                val dayMin =
-                                    if (newSelectMonth == getTimeMonth(startTime)) getTimeDay(startTime) else 1
-                                val dayMax = getDaysOfMonth(selectYear, newSelectMonth)
-                                val newDaySelect = selectDay.coerceAtLeast(dayMin).coerceAtMost(dayMax)
-                                dialog.addPickList(
-                                    tagD, "$newDaySelect", dayList,
-                                    dayStartStr, dayEndStr
-                                )
-                            }
-                        }
-                        getTimeYear(endTime) -> {
-                            val monthList = getMonthList(selectYear)
-                            val newSelectMonth = selectMonth.coerceAtMost(getTimeMonth(endTime))
-                            dialog.addPickList(
-                                tagM, "$newSelectMonth", monthList,
-                                monthStartStr, monthEndStr, null, this
-                            )
-                            if (dialog.isHasTag(tagD)) {
-                                dialog.removePickList(tagD)
-                                val dayList = getDayList(selectYear, newSelectMonth)
-                                val dayMin = 1
-                                val dayMax =
-                                    if (newSelectMonth == getTimeMonth(endTime)) getTimeDay(endTime) else getDaysOfMonth(
-                                        selectYear,
-                                        newSelectMonth
-                                    )
-                                val newDaySelect = selectDay.coerceAtLeast(dayMin).coerceAtMost(dayMax)
-                                dialog.addPickList(
-                                    tagD, "$newDaySelect", dayList,
-                                    dayStartStr, dayEndStr
-                                )
-                            }
-                        }
-                        else -> {
-                            val monthList = getMonthList(selectYear)
-                            dialog.addPickList(
-                                tagM, "$selectMonth", monthList,
-                                monthStartStr, monthEndStr, null, this
-                            )
-                            if (dialog.isHasTag(tagD)) {
-                                dialog.removePickList(tagD)
-                                val dayList = getDayList(selectYear, selectMonth)
-                                val dayMin = 1
-                                val dayMax = getDaysOfMonth(selectYear, selectMonth)
-                                val newDaySelect = selectDay.coerceAtLeast(dayMin).coerceAtMost(dayMax)
-                                dialog.addPickList(
-                                    tagD, "$newDaySelect", dayList,
-                                    dayStartStr, dayEndStr
-                                )
-                            }
-                        }
+                    // 获取月份列表
+                    val monthList = getMonthList(selectYear)
+                    // 重新选中月份
+                    val newSelectMonth = if (monthList.contains("$selectMonth")) selectMonth else monthList[0].toInt()
+                    dialog.addPickList(
+                        tagM, "$newSelectMonth", monthList,
+                        monthStartStr, monthEndStr, null, this
+                    )
+                    if (dialog.isHasTag(tagD)) {
+                        dialog.removePickList(tagD)
+                        val dayList = getDayList(selectYear, newSelectMonth)
+                        val newDaySelect = if (dayList.contains("$selectDay")) selectDay else dayList[0].toInt()
+                        dialog.addPickList(
+                            tagD, "$newDaySelect", dayList,
+                            dayStartStr, dayEndStr
+                        )
                     }
                 }
                 tagM -> {
                     if (!dialog.isHasTag(tagD)) return@onSelect
                     dialog.removePickList(tagD)
                     val dayList = getDayList(selectYear, selectMonth)
-                    val dayMin = if (selectYear == getTimeYear(startTime) && selectMonth == getTimeMonth(startTime)) getTimeDay(startTime) else 1
-                    val dayMax = if (selectYear == getTimeYear(endTime) && selectMonth == getTimeMonth(endTime)) getTimeDay(endTime) else getDaysOfMonth(selectYear, selectMonth)
-                    val newDaySelect = selectDay.coerceAtLeast(dayMin).coerceAtMost(dayMax)
-                    dialog.addPickList(tagD, "$newDaySelect", dayList,
-                        dayStartStr, dayEndStr)
+                    val newDaySelect = if (dayList.contains("$selectDay")) selectDay else dayList[0].toInt()
+                    dialog.addPickList(
+                        tagD, "$newDaySelect", dayList,
+                        dayStartStr, dayEndStr
+                    )
                 }
             }
         }
@@ -225,22 +179,16 @@ class DatePickerDialog constructor(
      */
     fun getMonthList(selectYear: Int): List<String> {
         val list = mutableListOf<String>()
-        when (selectYear) {
-            getTimeYear(startTime) -> {
-                for (i in getTimeMonth(startTime) .. 12) {
-                    list.add("$i")
-                }
-            }
-            getTimeYear(endTime) -> {
-                for (i in 1 .. getTimeMonth(endTime)) {
-                    list.add("$i")
-                }
-            }
-            else -> {
-                for (i in 1 .. 12) {
-                    list.add("$i")
-                }
-            }
+        val min = when (selectYear) {
+            getTimeYear(startTime) -> getTimeMonth(startTime)
+            else -> 1
+        }
+        val max = when(selectYear) {
+            getTimeYear(endTime) -> getTimeMonth(endTime)
+            else -> 12
+        }
+        for (i in min .. max) {
+            list.add("$i")
         }
         return list
     }
@@ -253,26 +201,18 @@ class DatePickerDialog constructor(
      */
     fun getDayList(selectYear: Int, selectMonth: Int): List<String> {
         val list = mutableListOf<String>()
-        when(selectYear) {
-            getTimeYear(startTime) -> {
-                val dayMin = if (selectMonth == getTimeMonth(startTime))
-                    getTimeDay(endTime) else 1
-                for (i in dayMin .. getDaysOfMonth(selectYear, selectMonth)) {
-                    list.add("$i")
-                }
-            }
-            getTimeYear(endTime) -> {
-                val dayMax = if (selectMonth == getTimeMonth(endTime))
-                    getTimeDay(endTime) else getDaysOfMonth(selectYear, selectMonth)
-                for (i in 1 .. dayMax) {
-                    list.add("$i")
-                }
-            }
-            else -> {
-                for (i in 1 .. getDaysOfMonth(selectYear, selectMonth)) {
-                    list.add("$i")
-                }
-            }
+        val min = when {
+            selectYear == getTimeYear(startTime)
+                    && selectMonth == getTimeMonth(startTime) -> getTimeDay(startTime)
+            else -> 1
+        }
+        val max = when {
+            selectYear == getTimeYear(endTime)
+                    && selectMonth == getTimeMonth(endTime) -> getTimeDay(endTime)
+            else -> getDaysOfMonth(selectYear, selectMonth)
+        }
+        for (i in min .. max) {
+            list.add("$i")
         }
         return list
     }
