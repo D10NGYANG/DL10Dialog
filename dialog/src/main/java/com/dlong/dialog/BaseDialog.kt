@@ -54,10 +54,17 @@ open class BaseDialog constructor(
 
 /**
  * 创建
- * @return [T]
+ * @receiver T
+ * @param isTitleVisible Boolean
+ * @param isIconVisible Boolean
+ * @param isMsgVisible Boolean
+ * @return T
  */
-fun <T : BaseDialog> T.create() : T {
+fun <T : BaseDialog> T.create(isTitleVisible: Boolean = true, isIconVisible: Boolean = true, isMsgVisible: Boolean = true) : T {
     // 初始化数据
+    binding.isTitleVisible = isTitleVisible
+    binding.isIconVisible = isIconVisible
+    binding.isMsgVisible = isMsgVisible
     binding.loadIndeterminate = true
     binding.loadVisible = false
     builder.setView(binding.root)
@@ -93,6 +100,7 @@ fun <T : BaseDialog> T.removeContent(): T {
  */
 fun <T : BaseDialog> T.setTittle(tittle: String) : T {
     binding.tittle = tittle
+    binding.isTitleVisible = tittle.isNotEmpty()
     return this
 }
 
@@ -103,6 +111,7 @@ fun <T : BaseDialog> T.setTittle(tittle: String) : T {
  */
 fun <T : BaseDialog> T.setMsg(msg: String) : T {
     binding.message = msg
+    binding.isMsgVisible = msg.isNotEmpty()
     return this
 }
 
@@ -113,6 +122,7 @@ fun <T : BaseDialog> T.setMsg(msg: String) : T {
  */
 fun <T : BaseDialog> T.setIcon(resId: Int) : T {
     binding.image.setImageResource(resId)
+    binding.isMsgVisible = resId != 0
     return this
 }
 
@@ -123,6 +133,7 @@ fun <T : BaseDialog> T.setIcon(resId: Int) : T {
  */
 fun <T : BaseDialog> T.setIcon(bitmap: Bitmap) : T {
     binding.image.setImageBitmap(bitmap)
+    binding.isMsgVisible = true
     return this
 }
 
@@ -133,7 +144,7 @@ fun <T : BaseDialog> T.setIcon(bitmap: Bitmap) : T {
  * @param max 最大值
  * @return [T]
  */
-fun <T : BaseDialog> T.startLoad(indeterminate: Boolean, progress: Int, max: Int) : T {
+fun <T : BaseDialog> T.startLoad(indeterminate: Boolean, progress: Int = 0, max: Int = 1) : T {
     binding.loadIndeterminate = indeterminate
     binding.loadProgress = progress
     binding.loadMax = max
@@ -167,7 +178,7 @@ fun <T : BaseDialog> T.stopLoad(): T {
  * @param onBtnClick 点击事件
  * @return [T]
  */
-fun <T : BaseDialog> T.addAction(text: String, style: Int, onBtnClick: (OnBtnClickListener<T>.() -> Unit)?) : T {
+fun <T : BaseDialog> T.addAction(text: String, style: Int = ButtonStyle.NORMAL, onBtnClick: (OnBtnClickListener<T>.() -> Unit)? = null) : T {
     val view = createButton(text, style, onBtnClick)
     removeAction(text)
     binding.buttonLayout.addView(view)
@@ -190,14 +201,27 @@ fun <T : BaseDialog> T.removeAction(text: String): T {
 
 /**
  * 显示
- * @return [T]
+ * @receiver T
+ * @param bgDrawableId Int 背景资源
+ * @return T
  */
-fun <T : BaseDialog> T.show(): T {
+fun <T : BaseDialog> T.show(bgDrawableId: Int = R.drawable.dialog_def_bg): T {
     val act = context as Activity
     if (!act.isFinishing && alert?.isShowing == false) {
         alert?.show()
-        alert?.window?.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.dialog_def_bg))
+        this.setBackgroundDrawable(bgDrawableId)
     }
+    return this
+}
+
+/**
+ * 设置背景
+ * @receiver T
+ * @param drawableId Int
+ * @return T
+ */
+fun <T : BaseDialog> T.setBackgroundDrawable(drawableId: Int): T {
+    alert?.window?.setBackgroundDrawable(ContextCompat.getDrawable(context, drawableId))
     return this
 }
 

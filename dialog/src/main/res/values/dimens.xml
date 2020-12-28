@@ -11,8 +11,12 @@
     <dimen name="SP_28">28sp</dimen>
     <dimen name="SP_30">30sp</dimen>
 
+    <!-- 标题字体大小 -->
     <dimen name="textTitleSize">20sp</dimen>
+    <!-- 内容字体大小 -->
     <dimen name="textContentSize">16sp</dimen>
+    <!-- 背景内距离大小 -->
     <dimen name="dialogBgPaddingSize">10dp</dimen>
+    <!-- 背景圆角大小 -->
     <dimen name="dialogBgRadius">20dp</dimen>
 </resources>

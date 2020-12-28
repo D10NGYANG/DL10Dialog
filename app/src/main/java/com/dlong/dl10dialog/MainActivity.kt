@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.dlong.dialog.*
 import com.dlong.dl10dialog.adapter.GridIconAdapter
+import com.dlong.dl10dialog.custom.SyncOfflineMsgDialog
 import com.dlong.dl10dialog.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
 
@@ -219,5 +220,29 @@ class MainActivity : AppCompatActivity() {
             delay(1000)
             withContext(Dispatchers.Main) {dialog.dismiss()}
         }
+    }
+
+    @Synchronized
+    fun clickCustom(view: View) {
+        val dialog = SyncOfflineMsgDialog(this).create(
+            isTitleVisible = false,
+            isIconVisible = false,
+            isMsgVisible = false
+        ).addAction("开始同步", ButtonStyle.THEME) {
+            onClick { dialog, _ ->
+                dialog.showLoading()
+                dialog.removeAllButtons()
+                dialog.addAction("隐藏")
+                GlobalScope.launch {
+                    delay(1000)
+                    withContext(Dispatchers.Main) {
+                        dialog.showFinish()
+                        dialog.removeAllButtons()
+                        dialog.addAction("完成")
+                    }
+                }
+            }
+        }.addAction("取消")
+            .show(R.drawable.bg_sync_offline)
     }
 }

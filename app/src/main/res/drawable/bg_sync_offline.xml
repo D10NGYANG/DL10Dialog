@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="rectangle">
+    <item android:left="@dimen/dialogBgPaddingSize"
+          android:bottom="@dimen/dialogBgPaddingSize"
+          android:top="@dimen/dialogBgPaddingSize"
+          android:right="@dimen/dialogBgPaddingSize">
+
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/dialogBgRadius"/>
+            <solid android:color="@android:color/transparent"/>
+        </shape>
+    </item>
+    <item android:left="@dimen/dialogBgPaddingSize"
+          android:bottom="@dimen/dialogBgPaddingSize"
+          android:top="80dp"
+          android:right="@dimen/dialogBgPaddingSize">
+
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/dialogBgRadius"/>
+            <solid android:color="@color/colorDialogBackground"/>
+        </shape>
+    </item>
+</layer-list>
