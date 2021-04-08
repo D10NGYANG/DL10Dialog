@@ -32,7 +32,7 @@
                 android:layout_marginStart="8dp"
                 android:text="同步离线消息"
                 android:textSize="16sp"
-                android:textColor="@color/colorTextTittle"/>
+                android:textColor="@color/colorTextTitle"/>
         </LinearLayout>
 
         <ImageView
@@ -51,7 +51,7 @@
             android:lineSpacingExtra="4dp"
             android:text="离线消息是因设备关机或卫星信号弱等原因导致没有成功接收的消息。\n无公网信号情况下，可通过卫星信号每次获取10条离线消息。\n公网信号正常情况下获取离线消息没有限制。"
             android:textSize="12sp"
-            android:textColor="@color/colorTextNormal"/>
+            android:textColor="@color/colorTextMessage"/>
 
     </LinearLayout>
 </layout>

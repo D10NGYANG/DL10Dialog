@@ -22,7 +22,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:indeterminate="true"
-            android:indeterminateTint="#FFFFFF"
+            android:indeterminateTint="@color/colorJustLoadDialogProgress"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

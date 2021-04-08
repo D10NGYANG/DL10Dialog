@@ -2,15 +2,21 @@
 <resources>
     <!-- text -->
     <color name="colorTextTheme">#005070</color>
-    <color name="colorTextTittle">#ffffff</color>
-    <color name="colorTextNormal">#dddddd</color>
+    <color name="colorTextTitle">#ffffff</color>
+    <color name="colorTextMessage">#dddddd</color>
     <color name="colorTextHint">#aaaaaa</color>
-    <color name="colorTextError">#FF0000</color>
+    <color name="colorTextError">#ff0000</color>
     <color name="colorTextKey">#ffff00</color>
+    <color name="colorTextContent">#ffffff</color>
 
     <!-- background -->
     <color name="colorDialogBackground">#333333</color>
-    <color name="colorDialogTittleBackground">#444444</color>
+    <color name="colorDialogTitleBackground">#444444</color>
     <color name="colorDialogButtonBackground">#555555</color>
     <color name="colorDialogSpaceLine">#666666</color>
+    <color name="colorDialogEditTextBackgroundTint">#dddddd</color>
+
+    <!-- JustLoadDialog -->
+    <color name="colorJustLoadDialogBackground">#97454545</color>
+    <color name="colorJustLoadDialogProgress">#ffffff</color>
 </resources>

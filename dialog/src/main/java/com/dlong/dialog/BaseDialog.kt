@@ -95,12 +95,12 @@ fun <T : BaseDialog> T.removeContent(): T {
 
 /**
  * 设置标题
- * @param tittle 标题文本
+ * @param title 标题文本
  * @return [T]
  */
-fun <T : BaseDialog> T.setTittle(tittle: String) : T {
-    binding.tittle = tittle
-    binding.isTitleVisible = tittle.isNotEmpty()
+fun <T : BaseDialog> T.setTitle(title: String) : T {
+    binding.title = title
+    binding.isTitleVisible = title.isNotEmpty()
     return this
 }
 

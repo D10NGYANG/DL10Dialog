@@ -23,8 +23,8 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@{startText}"
-            android:textColor="@color/colorTextNormal"
-            android:textSize="@dimen/textContentSize" />
+            android:textColor="@color/colorTextMessage"
+            android:textSize="@dimen/textMessageSize" />
 
         <com.dlong.dialog.view.CustomNumberPicker
             android:id="@+id/picker"
@@ -39,8 +39,8 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@{endText}"
-            android:textColor="@color/colorTextNormal"
-            android:textSize="@dimen/textContentSize" />
+            android:textColor="@color/colorTextMessage"
+            android:textSize="@dimen/textMessageSize" />
 
     </LinearLayout>
 </layout>

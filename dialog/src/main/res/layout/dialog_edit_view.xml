@@ -22,8 +22,8 @@
                 android:id="@+id/edt_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorTextTittle"
-                android:backgroundTint="@color/colorTextNormal"
+                android:textColor="@color/colorTextContent"
+                android:backgroundTint="@color/colorDialogEditTextBackgroundTint"
                 android:hint="hint" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>

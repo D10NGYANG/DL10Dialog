@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     @Synchronized
     fun clickNormalButtonDialog(view: View) {
         ButtonDialog(this).create()
-            .setTittle("提示")
+            .setTitle("提示")
             .setMsg("你好帅啊！")
             .setIcon(R.mipmap.icon_notice)
             .addAction("我知道", ButtonStyle.THEME, null)
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     fun clickEditDialog(view: View) {
         val tag = "phone"
         EditDialog(this).create()
-            .setTittle("提示")
+            .setTitle("提示")
             .setMsg("验证账户")
             .setIcon(R.mipmap.icon_notice)
             .addEdit(tag, "", "请输入手机号码")
@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
             )
         )
         GridDialog(this).create()
-            .setTittle("提示")
+            .setTitle("提示")
             .setMsg("选择图标")
             .setIcon(R.mipmap.icon_notice)
             .setGridList(adapter, 3) {
@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
         val list = listOf("张三", "里斯", "编剧", "鼠标", "手机", "吉萨", "沙雕", "戊午")
         val tag = "person"
         PickerDialog(this).create()
-            .setTittle("提示")
+            .setTitle("提示")
             .setMsg("选择联系人")
             .setIcon(R.mipmap.icon_notice)
             .addPickList(tag, list[1], list, "", "")
@@ -136,7 +136,7 @@ class MainActivity : AppCompatActivity() {
         val hTag = "hour"
         val mTag = "minute"
         PickerDialog(this).create()
-            .setTittle("提示")
+            .setTitle("提示")
             .setMsg("选择时间")
             .setIcon(R.mipmap.icon_notice)
             .addPickList(hTag, hourList[1], hourList, "", " : ")
@@ -156,7 +156,7 @@ class MainActivity : AppCompatActivity() {
     @Synchronized
     fun clickDataPickDialog(view: View) {
         DatePickerDialog(this).create()
-            .setTittle("提示")
+            .setTitle("提示")
             .setMsg("选择日期")
             .setYearPickList(end = "年")
             .setMonthPickList(end = "月")
@@ -177,7 +177,7 @@ class MainActivity : AppCompatActivity() {
     @Synchronized
     fun clickMultiSelectDialog(view: View) {
         MultiSelectDialog(this).create()
-            .setTittle("提示")
+            .setTitle("提示")
             .setMsg("请选择你喜欢的手机品牌，可多选")
             .addSelectItem("小米", false)
             .addSelectItem("华为", false)

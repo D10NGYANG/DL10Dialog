@@ -25,7 +25,7 @@ class CustomNumberPicker constructor(
         super.addView(child, index, params)
         if (child is EditText) {
             //设置文字的颜色和大小
-            child.setTextColor(ContextCompat.getColor(context, R.color.colorTextNormal))
+            child.setTextColor(ContextCompat.getColor(context, R.color.colorTextMessage))
             child.textSize = 16f
         }
     }
